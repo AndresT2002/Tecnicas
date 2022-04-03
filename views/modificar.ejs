@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	
+	
+    <title>Actualizar</title>
+  </head>
+  
+  <body>
+    <script src="js/code.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="/">Registro</a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+			  <li class="nav-item">
+				<a class="nav-link active navbar-brand" aria-current="page" href="/modificar">Modificar</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+
+
+
+    <div class="container table-responsive ">
+		<table id="tablaClientes" class="table mt-4 "> 
+			<tr>
+				<th style="display: none;">ID</th>
+				<th>Nombre</th>
+				<th>Edad</th>
+				<th>Cedula</th>
+				<th>Telefono</th>
+				<th>Estado Civil</th>
+				<th>Estado Empleo</th>
+				<th>Puntaje</th>
+				<th>¿Apto Crédito?</th>
+				<th>Acciones</th>
+			</tr>
+			<tbody>
+				
+				<% for (let i = 0; i < clientes.length; i++) { %>
+					<tr>
+						<td style="display: none;" ><%= clientes[i]._id %></td>
+						<td ><%= clientes[i].nombre %></td>
+						<td ><%= clientes[i].edad %></td>
+						<td ><%= clientes[i].cedula %></td>
+						<td ><%= clientes[i].telefono %></td>
+						<td><%= clientes[i].estadoCivil %></td>
+						<td ><%= clientes[i].estadoTrabajo %></td>
+						<td ><%= clientes[i].puntaje%></td>
+						<td ><%= clientes[i].aptoCredito%></td>
+						
+						<td> 
+							<a type="button"class="btnEditar btn btn-outline-primary bi bi-pencil "data-bs-toggle="modal" data-bs-target="#modalCliente<%= clientes[i]._id %>"></a>
+							<a href="/eliminar/<%= clientes[i]._id %>" class="btn btn-outline-danger bi bi-trash"></a>
+						</td>
+					
+					</tr>
+				
+			</tbody>
+
+			<% } %>
+		</table>
+	</div>
+	
+	<% for (let i = 0; i < clientes.length; i++) { %>	
+	<div id="modalCliente<%= clientes[i]._id %>" class="modal fade" tabindex="-1" aria-labelledby="modalCliente" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="exampleModalLabel">Editar Info</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form  action="/edit/<%=clientes[i]._id%>" method="POST" >
+                  <input name="id_editar" id="id_editar" type="text" hidden>
+                <div class="mb-3">
+                  <label for="nombre_editar" class="col-form-label">Nombre:</label>
+                  <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="<%= clientes[i].nombre %>">
+                </div>
+				<div class="mb-3">
+					<label for="edad_editar" class="col-form-label">Edad:</label>
+					<input id="edad_editar" name="edad_editar" type="number" class="form-control" value="<%= clientes[i].edad %>">
+				  </div>
+				  <div class="mb-3">
+					<label for="telefono_editar" class="col-form-label">Telefono:</label>
+					<input id="telefono_editar" name="telefono_editar" type="number" class="form-control" value="<%= clientes[i].telefono %>">
+				  </div>
+				  <div class="mb-3">
+
+					
+
+					<label for="estadoC_editar" class="col-form-label">Estado Civil:</label>
+					<input id="estadoC_editar" name="estadoC_editar" type="text" class="form-control" value="<%= clientes[i].estadoCivil %>">
+				  </div>
+                <div class="mb-3">
+                  <label for="estadoT_editar" class="col-form-label">Estado Trabajo:</label>
+                  <input id="estadoT_editar" name="estadoT_editar" type="text" class="form-control" value="<%= clientes[i].estadoTrabajo %>">
+                </div>
+             
+            </div>
+            <div class="modal-footer">              
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+          </form>
+          </div>
+        </div>
+		
+    </div>
+	<% } %>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  </body>
+</html>
