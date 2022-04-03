@@ -1,5 +1,5 @@
 const mongoose =require('mongoose');
-const url='mongodb://localhost/db_clientes'
+const url='mongodb+srv://atoloza:<Memoriasuper123>@cluster0.wknwa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 
 mongoose.connect(url,{
